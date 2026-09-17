@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Invoice Sederhana</title>
+    <style>
+
+      * {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background-image: url(pp.webp);a
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .card {
+        margin: 200px 500px;
+        background-color: #ccc9c6;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        max-width: 450px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .header h1 {
+        font-size: 22px;
+        margin: 0 0 5px 0;
+        color: #0f0f0f;
+      }
+
+      .header p {
+        font-size: 13px;
+        color: #cf2f2f;
+        margin: 0;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #0a0a0a;
+        margin-bottom: 6px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 14px;
+        border: 1px solid #d61d1d;
+        border-radius: 6px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .form-control:focus {
+        border-color: #eaeaeb;
+      }
+
+      .row {
+        display: flex;
+        gap: 15px;
+      }
+
+      .row .form-group {
+        flex: 1;
+      }
+
+
+      .result-box {
+        margin-top: 25px;
+        padding: 16px 20px;
+        background-color:#d61d1d ;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(8, 83, 235, 0.2);
+      }
+
+      .result-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+      }
+
+      .result-value {
+        font-size: 18px;
+        font-weight: bold;
+        color: #f3eeee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <h1>nikoffee</h1>
+        <p>Hitung otomatis total tagihan barang</p>
+      </div>
+
+      <div class="form-group">
+        <label for="namaBarang">Nama Barang</label>
+        <input
+          type="text"
+          id="namaBarang"
+          class="form-control"
+          placeholder="Masukkan nama barang"
+        />
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="hargaBarang">Harga Barang (Rp)</label>
+          <input
+            type="number"
+            id="hargaBarang"
+            class="form-control"
+            placeholder="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="jumlahBeli">Jumlah Beli</label>
+          <input
+            type="number"
+            id="jumlahBeli"
+            class="form-control"
+            placeholder="0"
+          />
+        </div>
+      </div>
+
+      <div class="result-box">
+        <span class="result-title">Total Tagihan</span>
+        <span class="result-value" id="totalTagihan">Rp 0</span>
+      </div>
+    </div>
+
+    <script>
+      const hargaBarangInput = document.getElementById("hargaBarang");
+      const jumlahBeliInput = document.getElementById("jumlahBeli");
+      const totalTagihanOutput = document.getElementById("totalTagihan");
+
+      function hitungTotal() {
+        const harga = parseFloat(hargaBarangInput.value) || 0;
+        const jumlah = parseFloat(jumlahBeliInput.value) || 0;
+
+        const total = harga * jumlah;
+
+        const totalFormatted = new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          maximumFractionDigits: 0,
+        }).format(total);
+
+        totalTagihanOutput.textContent = totalFormatted;
+      }
+
+      hargaBarangInput.addEventListener("input", hitungTotal);
+      jumlahBeliInput.addEventListener("input", hitungTotal);
+    </script>
+  </body>
+</html>
